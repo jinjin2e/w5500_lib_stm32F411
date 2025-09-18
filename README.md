@@ -1,7 +1,7 @@
 # w5500_lib_stm32F411
 w5500 간단한 라이브러리  
   
-- define 0, 1 변경만 하면 같은 함수로 server, client 모두 동작함
+- #define SERVER 0, 1 변경만 하면 같은 함수로 server, client 모두 동작함
 
 
   다른 칩으로 이식할 때 변경점
