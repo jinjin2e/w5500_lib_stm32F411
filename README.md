@@ -16,9 +16,9 @@ w5500 간단한 라이브러리
 * 만약 flash나 다른 저장장치를 사용해서 전원이 꺼져도 값이 유지되는 동작을 추가하려면
 
 ```
-  void socket_open(uint8_t sn) {
+void socket_open(uint8_t sn) {
 #if SERVER
-    // === ���� ��� ===
+    // === 서버 모드 ===
     W5500_WriteReg(Sn_MR(sn), 0x0C, 0x01);  // TCP
     uint8_t port[2] = { sys_config.port >> 8, sys_config.port & 0xFF };
     W5500_WriteBuf(Sn_PORT(sn), 0x0C, port, 2);
@@ -27,14 +27,14 @@ w5500 간단한 라이브러리
     W5500_WriteReg(Sn_CR(sn), 0x0C, CMD_LISTEN);
     printf("TCP Server opened on port %d\r\n", sys_config.port);
 #else
-    // === Ŭ���̾�Ʈ ��� ===
+    // === 클라이언트 모드 ===
     W5500_WriteReg(Sn_MR(sn), 0x0C, 0x01);  // TCP
 
-    // Ŭ���̾�Ʈ ���ε� ��Ʈ �� W5500�� �ڵ����� �����ص� ������ ���������� �Ҵ� ����
+    // 클라이언트 바인드 포트 → W5500이 자동으로 설정해도 되지만 명시적으로 할당 가능
     uint8_t port[2] = { 0x00, 0x00 };
     W5500_WriteBuf(Sn_PORT(sn), 0x0C, port, 2);
 
-    // ������ IP / ��Ʈ
+    // 목적지 IP / 포트
     W5500_WriteBuf(Sn_DIPR(sn), 0x0C, client_config.dest_ip, 4);
     uint8_t dport[2] = { client_config.dest_port >> 8, client_config.dest_port & 0xFF };
     W5500_WriteBuf(Sn_DPORT(sn), 0x0C, dport, 2);
