@@ -8,5 +8,6 @@ w5500 간단한 라이브러리
 
   1. w5500.h 에 #include "stm32f4xx_hal.h" mcu에 맞게 수정.  
   2. w5500.c 에 extern SPI_HandleTypeDef hspi1;  부분 프로젝트의 spi 설정에 맞게 수정하기. *spi 속도가 12MHz 이상이 되면 동작에 문제가 생길 수 있음.
-  3. 끝!  
+  3. spi 포트와, cs, reset 등 라이브러리에서 사용하고 있는 포트 설정해주기.
+  4. 끝!  
 
